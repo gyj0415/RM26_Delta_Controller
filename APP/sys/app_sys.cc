@@ -16,6 +16,7 @@
 #include "app_chassis.h"
 #include "app_gimbal.h"
 #include "app_conf.h"
+#include "app_custom.h"
 #include "bsp_buzzer.h"
 
 #include <cstdio>
@@ -74,6 +75,9 @@ void app_sys_init() {
 #ifdef COMPILE_GIMBAL
     config.type |= 0b10;
     app_gimbal_init();
+#endif
+#ifdef COMPILE_CUSTOM
+    app_custom_init();
 #endif
 #ifdef USE_REFEREE_SYSTEM
     app_referee_init();
@@ -141,6 +145,10 @@ __weak void app_chassis_task(void *argument) {
 }
 
 __weak void app_gimbal_task(void *argument) {
+    OS::Task::Current().Delete();
+}
+
+__weak void app_custom_task(void *argument) {
     OS::Task::Current().Delete();
 }
 
