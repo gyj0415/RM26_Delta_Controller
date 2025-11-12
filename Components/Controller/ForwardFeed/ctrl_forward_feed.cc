@@ -4,8 +4,10 @@
 
 #include "ctrl_forward_feed.h"
 
+#include <algorithm>
+
 using namespace Controller;
 
 float ForwardFeed::update(float current, float target) {
-	return current + target;
+    return std::clamp(current + target, _output_min, _output_max);
 }
