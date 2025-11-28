@@ -9,3 +9,4 @@ Core
 .mxproject
 .idea
 CMakeLists.txt
+_codeql_detected_source_root
