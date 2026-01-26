@@ -124,6 +124,9 @@ void app_custom_task(void *args) {
         DM_Motor2.control(-deg_t[1],0,5,1,tor[1]);
         DM_Motor3.control(-deg_t[2],0,5,1,tor[2]);
 
+        // joint1.joint_update(false, 0, 0);
+        // joint2.joint_update(false, 0, 0);
+        // joint3.joint_update(false, 0, 0);
         joint1.joint_update(true, -90, 0);
         joint2.joint_update(true, -30+std::fabs(count)/50.0f, 0);
         joint3.joint_update(true, -25+std::fabs(count)/50.0f, 0);
@@ -148,18 +151,21 @@ void app_custom_task(void *args) {
             deg_t[i] = t_deg[i][0];
         }
         app_msg_vofa_send(E_UART_DEBUG,
-            // pos[0],
-            // pos[1],
-            // pos[2],
+            pos[0],
+            pos[1],
+            pos[2],
+            pos_t[0],
+            pos_t[1],
+            pos_t[2]
             // DM_Motor1.status.torque,
             // DM_Motor2.status.torque,
             // DM_Motor3.status.torque,
-            rpy[0],
-            joint2.motor_ctrl_->output,
-            joint2.t_tor * GM6020_TOR_TO_COUNT,
-            joint2.motor_ctrl_->device()->angle,
-            // joint3.motor_ctrl_->angle
-            joint2.lst_online_time
+            // rpy[0],
+            // joint2.motor_ctrl_->output,
+            // joint2.t_tor * GM6020_TOR_TO_COUNT,
+            // joint2.motor_ctrl_->device()->angle,
+            // // joint3.motor_ctrl_->angle
+            // joint2.lst_online_time
             );
         OS::Task::SleepMilliseconds(1);
         if(++c_count == 10) {

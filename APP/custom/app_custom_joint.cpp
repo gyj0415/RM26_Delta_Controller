@@ -39,6 +39,7 @@ void Joint::joint_update(bool use_tar, double target, double tor_t) {
         if(error_code_&APP_JOINT_ERROR_ANGLE_LIMIT) enable_flag_ = false, t_tor = 0;
         if(error_code_&APP_JOINT_ERROR_TORQUE_UP_LIMIT) t_tor = max_torque_;
         if(error_code_&APP_JOINT_ERROR_TORQUE_DOWN_LIMIT) t_tor = -max_torque_;
+
         if(enable_flag_) {
             if(use_tar_) {
                 motor_ctrl_->update(target);
