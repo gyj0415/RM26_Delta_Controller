@@ -6,6 +6,7 @@
 #include "app_motor.h"
 
 #include "ctrl_pid.h"
+#include <cstdint>
 
 //0.0152 j2 杆长
 //0.524kg 质量
